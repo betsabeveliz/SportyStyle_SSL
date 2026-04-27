@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SportyStyle - Tienda deportiva online</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <div class="logo-icon">🏃‍♀️</div>
+      <div>
+        <h1>Sporty<span>Style</span></h1>
+        <p>Tienda deportiva online</p>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#inicio" class="active">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#carrito">Carrito</a>
+      <a href="#pago">Pago</a>
+    </nav>
+
+    <div class="login-box">
+      <span id="mensajeUsuario">👤 Invitado</span>
+      <button id="btnLogin" onclick="login()">Iniciar sesión</button>
+      <button id="btnLogout" onclick="logout()" class="outline hidden">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-text">
+        <h2>Ropa y accesorios deportivos</h2>
+        <h3>para tu entrenamiento</h3>
+        <p>Selecciona tus productos, agrégalos al carrito y simula una compra segura usando Session Storage.</p>
+        <a class="btn-main" href="#productos">🛍️ Ver productos</a>
+      </div>
+
+      <div class="hero-products">
+        <img src="img/polera-nike-rosada.jpg" alt="Polera Nike rosada">
+        <img src="img/pantalon-puma-negro.jpg" alt="Pantalón Puma negro">
+        <img src="img/poleron-adidas-rosado.jpg" alt="Polerón Adidas rosado">
+        <img src="img/botella-nike-rosada.jpg" alt="Botella Nike rosada">
+        <img src="img/zapatillas-nike-rosadas.jpg" alt="Zapatillas Nike rosadas">
+      </div>
+    </section>
+
+    <section class="company-card">
+      <h2>🏢 Datos de la empresa</h2>
+      <div class="company-grid">
+        <div><strong>Responsable</strong><p>Betsabé Muñoz Veliz</p></div>
+        <div><strong>Correo</strong><p>ventas@sportystyle.cl</p></div>
+        <div><strong>Teléfono</strong><p>+56 9 8765 4321</p></div>
+        <div><strong>Dirección</strong><p>Av. Los Alerces 1245, Punta Arenas, Chile</p></div>
+      </div>
+    </section>
+
+    <section id="productos" class="section">
+      <h2>🏷️ Productos disponibles</h2>
+      <p>La tienda cuenta con camisetas deportivas, pantalones deportivos, polerones y accesorios.</p>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <img src="img/polera-nike-rosada.jpg" alt="Polera deportiva Nike rosada">
+          <div>
+            <h3>Polera deportiva Nike rosada</h3>
+            <p>Polera ligera y cómoda, ideal para entrenamientos y uso diario.</p>
+            <strong>$18.990</strong>
+            <button onclick="agregarCarrito('Polera deportiva Nike rosada', 18990)">🛒 Agregar al carrito</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="img/pantalon-puma-negro.jpg" alt="Pantalón deportivo Puma negro">
+          <div>
+            <h3>Pantalón deportivo Puma negro</h3>
+            <p>Pantalón flexible y resistente para gimnasio o actividades al aire libre.</p>
+            <strong>$29.990</strong>
+            <button onclick="agregarCarrito('Pantalón deportivo Puma negro', 29990)">🛒 Agregar al carrito</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="img/poleron-adidas-rosado.jpg" alt="Polerón deportivo Adidas rosado">
+          <div>
+            <h3>Polerón deportivo Adidas rosado</h3>
+            <p>Polerón suave y abrigado para antes y después del entrenamiento.</p>
+            <strong>$34.990</strong>
+            <button onclick="agregarCarrito('Polerón deportivo Adidas rosado', 34990)">🛒 Agregar al carrito</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="img/botella-nike-rosada.jpg" alt="Botella Nike rosada">
+          <div>
+            <h3>Botella Nike rosada</h3>
+            <p>Botella reutilizable con diseño deportivo para hidratarse durante el entrenamiento.</p>
+            <strong>$9.990</strong>
+            <button onclick="agregarCarrito('Botella Nike rosada', 9990)">🛒 Agregar al carrito</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="img/zapatillas-nike-rosadas.jpg" alt="Zapatillas Nike rosadas">
+          <div>
+            <h3>Zapatillas Nike rosadas</h3>
+            <p>Zapatillas deportivas rosadas, cómodas y modernas para entrenamiento o uso diario.</p>
+            <strong>$49.990</strong>
+            <button onclick="agregarCarrito('Zapatillas Nike rosadas', 49990)">🛒 Agregar al carrito</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="carrito" class="section cart-section">
+      <h2>🛒 Tu carrito</h2>
+      <div id="lista-carrito" class="cart-list"></div>
+      <div class="cart-total">Total: $<span id="total">0</span></div>
+      <button class="btn-secondary" onclick="vaciarCarrito()">Vaciar carrito</button>
+    </section>
+
+    <section id="pago" class="section checkout">
+      <div>
+        <h2>💳 Formulario de pago y despacho</h2>
+        <form onsubmit="finalizarCompra(event)">
+          <label>Nombre completo</label>
+          <input type="text" id="nombre" value="Barbarita Pérez" required>
+
+          <label>Dirección de envío</label>
+          <input type="text" id="direccion" value="Calle Volcán Osorno 245, Punta Arenas, Chile" required>
+
+          <label>Correo electrónico</label>
+          <input type="email" id="correo" value="barbarita.perez@gmail.com" required>
+
+          <label>Teléfono</label>
+          <input type="tel" id="telefono" value="56998765432" required>
+
+          <button type="submit">Finalizar compra</button>
+        </form>
+        <p class="hint">Validaciones: correo válido, teléfono solo con números y campos completos.</p>
+      </div>
+
+      <div id="confirmacion" class="confirmation hidden"></div>
+    </section>
+
+    <section class="receipt section">
+      <h2>🧾 Boleta / Comprobante</h2>
+      <div id="boleta" class="ticket">
+        <h3>Sporty<span>Style</span></h3>
+        <p>Tienda deportiva online</p>
+        <hr>
+        <p><strong>Empresa:</strong> SportyStyle SpA</p>
+        <p><strong>Correo:</strong> ventas@sportystyle.cl</p>
+        <p><strong>Dirección:</strong> Av. Los Alerces 1245, Punta Arenas</p>
+        <p><strong>Teléfono:</strong> +56 9 8765 4321</p>
+        <hr>
+        <div id="detalle-boleta">Agrega productos al carrito para generar el detalle.</div>
+        <hr>
+        <p class="thanks">¡Gracias por elegir SportyStyle! 💗</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 SportyStyle - Proyecto Taller de Plataformas Web</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

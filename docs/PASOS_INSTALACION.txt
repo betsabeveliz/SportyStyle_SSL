@@ -1,0 +1,1 @@
+Copiar esta carpeta en C:\xampp\htdocs\SportyStyle y abrir http://localhost/SportyStyle
